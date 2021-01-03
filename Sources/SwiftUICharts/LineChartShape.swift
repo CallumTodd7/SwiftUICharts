@@ -18,8 +18,10 @@ struct LineChartShape: Shape {
             var currentX: CGFloat = 0
             dataPoints.forEach {
                 currentX += stepX
-                let y = CGFloat($0.value / (dataPoints.max()?.value ?? 1)) * rect.height
-                path.addLine(to: CGPoint(x: currentX, y: rect.height - y))
+                if $0.visible {
+                    let y = CGFloat($0.value / (dataPoints.max()?.value ?? 1)) * rect.height
+                    path.addLine(to: CGPoint(x: currentX, y: rect.height - y))
+                }
             }
 
             if closePath {
